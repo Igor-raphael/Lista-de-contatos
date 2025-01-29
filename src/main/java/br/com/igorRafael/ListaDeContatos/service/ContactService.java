@@ -75,4 +75,23 @@ public class ContactService {
 		
 			return list();
 		}
+    
+
+
+    public List<Contact> deleteById(Long id, Contact contact){
+    	
+		ldcRepository.findById(id).ifPresentOrElse(existingContact -> {
+			
+			ldcRepository.delete(existingContact);
+		
+		}, () -> {
+			
+			throw new BadRequestException(" Contact %d does not exist ! ".formatted(id));
+		
+		});
+		
+		return list();
+    	
+    }
+    
 }
