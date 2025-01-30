@@ -10,6 +10,7 @@ import br.com.igorRafael.ListaDeContatos.entity.Contact;
 import br.com.igorRafael.ListaDeContatos.exception.BadRequestException;
 import br.com.igorRafael.ListaDeContatos.exception.NotExist;
 import br.com.igorRafael.ListaDeContatos.repository.LdcRepository;
+import jakarta.transaction.Transactional;
 
 @Service
 public class ContactService {
@@ -43,24 +44,7 @@ public class ContactService {
 	}
 	
 	
-	
-	public List<Contact> updateById(Long id, Contact contact){
-		
-		ldcRepository.findById(id).ifPresentOrElse(existingContact -> {
-			contact.setId(id);
-			ldcRepository.save(contact);
-		
-		}, () -> {
-			
-			throw new BadRequestException(" Contact %d does not exist ! ".formatted(id));
-		
-		});
-		
-		return list();
-	}
-
-	
-	
+	//FAZER O UPDATE VIA NOME
 	public List<Contact> updateByContact(String name, Contact contact){
 			
 		 List<Contact> existingContact = ldcRepository.findByName(name);
@@ -78,12 +62,32 @@ public class ContactService {
     
 
 
-    public List<Contact> deleteById(Long id, Contact contact){
+	//FAZER O DELETE VIA NOME
+	@Transactional
+    public List<Contact> deleteById(Long id){
     	
 		ldcRepository.findById(id).ifPresentOrElse(existingContact -> {
 			
 			ldcRepository.delete(existingContact);
-		
+			
+			List<Contact> contacts = ldcRepository.findAllByOrderByIdAsc();
+			
+			boolean updateNext = false;
+			
+			for(Contact CT: contacts){
+				
+				if (updateNext) {
+					CT.setId(CT.getId() -1 );
+					ldcRepository.save(CT);
+				}
+				
+				if (CT.getId().equals(id) ) {
+					updateNext = true;
+					
+				}
+				
+			}
+			
 		}, () -> {
 			
 			throw new BadRequestException(" Contact %d does not exist ! ".formatted(id));

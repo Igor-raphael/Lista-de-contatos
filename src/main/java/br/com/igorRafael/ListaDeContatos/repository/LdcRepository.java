@@ -8,4 +8,6 @@ import br.com.igorRafael.ListaDeContatos.entity.Contact;
 public interface LdcRepository extends JpaRepository<Contact, Long>{
 
 	List<Contact> findByName(String name);
+	
+	List<Contact> findAllByOrderByIdAsc();
 }

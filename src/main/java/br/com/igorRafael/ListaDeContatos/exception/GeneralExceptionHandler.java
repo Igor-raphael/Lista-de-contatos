@@ -23,11 +23,5 @@ public class GeneralExceptionHandler {
    private ResponseEntity<String> handleOptimisticEntityLockException(OptimisticEntityLockException exception){
 	   return ResponseEntity.status(HttpStatus.CONFLICT).body("A competition problem has occurred.");
    }
-   
-   @ExceptionHandler(Exception.class)
-   private ResponseEntity<String> handlerException(Exception ex){
-	   return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred while saving this number");
-   }
-	
 
 }
