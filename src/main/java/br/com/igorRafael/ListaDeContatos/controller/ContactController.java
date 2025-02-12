@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.igorRafael.ListaDeContatos.entity.Contact;
 import br.com.igorRafael.ListaDeContatos.service.ContactService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import jakarta.validation.Valid;
 
 @RestController
@@ -24,25 +26,43 @@ public class ContactController {
 	@Autowired
 	ContactService contactService;
 	
-	@GetMapping("/")
-	public List<Contact> obterLista(){
+	
+	@GetMapping()
+	public List<Contact> getList(){
 		return contactService.list();
 	}
+
+	
+	
+	@GetMapping("/get/{name}")
+	public List<Contact> getContact(@PathVariable("name") String name){
+		return contactService.getContact(name);
+		
+	}
+	
+	
+	
 	
 	@PostMapping("/newContact")
 	public Contact newContact(@RequestBody @Valid Contact contact){     
 		return contactService.create(contact);
 	}
 	
-	@PutMapping("{name}")
+	
+	
+	
+	
+	@PutMapping("/update/{name}")
 	public List<Contact> updateContactByName(@PathVariable("name") String name, @RequestBody @Valid Contact contact){
 		return contactService.updateByContact(name, contact);
 		
 	}
 	
-	@DeleteMapping("{id}")
-	public List<Contact> deleteById(@PathVariable("id") Long id){
-			return contactService.deleteById(id);
+	
+	
+	@DeleteMapping("/delete/{name}")
+	public List<Contact> deleteById(@PathVariable("name") String name){
+			return contactService.deleteByName(name);
 	}
 	
 
