@@ -109,9 +109,9 @@ spring.jpa.hibernate.ddl-auto=update
 - **Descrição**: Cria um novo contato com os dados fornecidos no corpo da requisição.    
   
 - **Requisitos obrigatórios:**  
- name: Não será válido o uso de nomes repetidos ou deixar o campo em branco.  
- number: É necessário que o número tenha entre que 10 a 15 dígitos.    
- email: É possível deixar esse campo vazio, mas se for colocar um email, para ele ser válido será necessário que haja o @ em sua composição.
+ `name`: Não será válido o uso de nomes repetidos ou deixar o campo em branco.  
+ `number`: É necessário que o número tenha entre que 10 a 15 dígitos.    
+ `email`: É possível deixar esse campo vazio, mas se for colocar um email, para ele ser válido será necessário que haja o @ em sua composição.
 
  
 - **Body:**
@@ -135,7 +135,36 @@ spring.jpa.hibernate.ddl-auto=update
 - **200 OK**: Retorna o contato criado.  
 - **400 Bad Request**: Se os dados fornecidos não forem válidos (por exemplo, se o nome ou o número estiverem ausentes).  
 
+### 4. `PUT /update/{name}`
 
+- **Descrição:** Atualiza os dados de um contato existente com base no nome fornecido.
+- **Parâmetros:**  
+  `name`: Nome do contato a ser atualizado.
+
+- **Body:**
+  
+~~~json  
+  {
+    "name": "João Silva",
+    "number": "98765432110",
+    "email": "João@gmail.com"
+  }   
+~~~
+
+**Resposta**:  
+- **200 OK**: Retorna a lista de contatos após a atualização.  
+- **400 Bad Request**: Se os dados forem inválidos ou se o nome digitado não existir no Banco de dados.
+
+### 5. `DELETE /delete/{name}`
+
+- **Descrição:** Deleta o contato com o nome especificado.
+- **Parâmetros:**  
+  `name`: Nome do contato a ser deletado.
+
+
+**Resposta**:  
+- **200 OK**: Retorna a lista de contatos após a exclusão.  
+- **400 Bad Request**: Se o contato não for encontrado.   
 
   
 
