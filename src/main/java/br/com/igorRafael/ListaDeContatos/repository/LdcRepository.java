@@ -12,6 +12,5 @@ public interface LdcRepository extends JpaRepository<Contact, Long>{
 	
 	List<Contact> findByNameIgnoreCaseContaining(String name);
 	
-	List<Contact> findAllByOrderByIdAsc();
 	}
 	

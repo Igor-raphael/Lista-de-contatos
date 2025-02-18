@@ -14,29 +14,46 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.igorRafael.ListaDeContatos.entity.Contact;
-import br.com.igorRafael.ListaDeContatos.service.ContactService;
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import br.com.igorRafael.ListaDeContatos.service.ContactCreateService;
+import br.com.igorRafael.ListaDeContatos.service.ContactDeleteService;
+import br.com.igorRafael.ListaDeContatos.service.ContactGetNameService;
+import br.com.igorRafael.ListaDeContatos.service.ContactListService;
+import br.com.igorRafael.ListaDeContatos.service.ContactUpdateService;
 import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/list")
 public class ContactController {
 
+	private ContactListService cls;
+	private ContactGetNameService cgns;
+	private ContactCreateService ccs;
+	private ContactUpdateService cus;
+	private ContactDeleteService cds;
+	
 	@Autowired
-	ContactService contactService;
+	public ContactController(ContactListService cls, ContactGetNameService cgns, ContactCreateService ccs, ContactUpdateService cus, ContactDeleteService cds ) {
+		this.cls = cls;
+		this.cgns = cgns;
+		this.ccs = ccs;
+		this.cus = cus;
+		this.cds = cds;
+		
+		
+	}
+	
 	
 	
 	@GetMapping()
 	public List<Contact> getList(){
-		return contactService.list();
+		return cls.list();
 	}
 
 	
 	
 	@GetMapping("/get/{name}")
 	public List<Contact> getContact(@PathVariable("name") String name){
-		return contactService.getContact(name);
+		return cgns.getContact(name);
 		
 	}
 	
@@ -45,7 +62,7 @@ public class ContactController {
 	
 	@PostMapping("/newContact")
 	public Contact newContact(@RequestBody @Valid Contact contact){     
-		return contactService.create(contact);
+		return ccs.create(contact);
 	}
 	
 	
@@ -54,7 +71,7 @@ public class ContactController {
 	
 	@PutMapping("/update/{name}")
 	public List<Contact> updateContactByName(@PathVariable("name") String name, @RequestBody @Valid Contact contact){
-		return contactService.updateByContact(name, contact);
+		return cus.updateByContact(name, contact);
 		
 	}
 	
@@ -62,7 +79,7 @@ public class ContactController {
 	
 	@DeleteMapping("/delete/{name}")
 	public List<Contact> deleteById(@PathVariable("name") String name){
-			return contactService.deleteByName(name);
+			return cds.deleteByName(name);
 	}
 	
 
