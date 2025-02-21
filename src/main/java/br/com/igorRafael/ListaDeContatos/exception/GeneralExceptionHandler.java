@@ -16,8 +16,8 @@ public class GeneralExceptionHandler {
 	}
 	
 	@ExceptionHandler(NotFoundException.class)
-	private ResponseEntity<String> handlerResult(NotFoundException exceptio){
-		return ResponseEntity.status(HttpStatus.OK).body(exceptio.getMessage());
+	private ResponseEntity<String> handlerNotFound(NotFoundException exception){
+		return ResponseEntity.status(HttpStatus.OK).body(exception.getMessage());
 	}
 	
 	

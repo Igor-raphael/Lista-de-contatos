@@ -17,7 +17,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import br.com.igorRafael.ListaDeContatos.entity.Contact;
 import br.com.igorRafael.ListaDeContatos.exception.NotFoundException;
@@ -31,7 +30,7 @@ public class ContactGetNameServiceTest {
 	@Mock
 	LdcRepository ldcRepository;
 	
-	@Autowired
+	
 	@InjectMocks
 	private ContactGetNameService contactGetNameService;
 	
