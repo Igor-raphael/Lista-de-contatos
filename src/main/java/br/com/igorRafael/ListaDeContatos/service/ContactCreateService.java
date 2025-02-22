@@ -19,18 +19,25 @@ public class ContactCreateService {
 		
 		 Optional<Contact> existingContact = ldcRepository.findByName(contact.getName());
 		 
-		 if (existingContact.isEmpty()) {
-			 
-			 if(contact.getName() != null && !contact.getName().trim().isBlank() 
-				&& contact.getNumber() != null && !contact.getNumber().trim().isBlank()) {
-				 
-				 ldcRepository.save(contact);
-			 }
-			 	 
-		 } else {
-			 throw new BadRequestException("Make sure that the name you're typing hasn't already been saved.");
-			
+		 if (existingContact.isPresent()) {
+			 throw new BadRequestException("Make sure that the " + contact.getName() + " you're typing hasn't already been saved.");
 		}
+		 
+		String regex = "^\\d+$";
+		if(contact.getNumber() == null || !contact.getNumber().matches(regex)) {
+			throw new BadRequestException("Invalid phone number format. \n"
+					+ "The mobile number must contain only digits.");
+		}
+		 
+		 
+			 
+		 if(contact.getName() == null || contact.getName().trim().isBlank() 
+				|| contact.getNumber() == null || contact.getNumber().trim().isBlank()) {
+					 
+		    throw new BadRequestException("Name and phone number cannot be null or blank.");
+	    }
+				 	 
+		 ldcRepository.save(contact);
 		 
 		return contact;
 	}

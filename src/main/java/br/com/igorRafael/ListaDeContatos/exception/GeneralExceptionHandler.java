@@ -3,6 +3,7 @@ package br.com.igorRafael.ListaDeContatos.exception;
 import org.hibernate.dialect.lock.OptimisticEntityLockException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -18,6 +19,11 @@ public class GeneralExceptionHandler {
 	@ExceptionHandler(NotFoundException.class)
 	private ResponseEntity<String> handlerNotFound(NotFoundException exception){
 		return ResponseEntity.status(HttpStatus.OK).body(exception.getMessage());
+	}
+	
+	@ExceptionHandler(HttpMessageNotReadableException.class)
+	private ResponseEntity<String> handleMessageNotReadable(HttpMessageNotReadableException exception){
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("check if the name and number fields are filled in correctly");
 	}
 	
 	

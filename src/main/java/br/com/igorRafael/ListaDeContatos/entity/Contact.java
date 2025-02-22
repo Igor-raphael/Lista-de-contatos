@@ -7,7 +7,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
 @Entity
@@ -22,7 +21,7 @@ public class Contact {
 	
 	private String name;
 	
-    @Pattern(regexp = "^\\d+$", message = "The mobile number must contain only digits.")
+   
 	@Size(min = 10, max = 15, message = "The mobile number must be between 10 and 15 characters long.")
     private String number;
 	
