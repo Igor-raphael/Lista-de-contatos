@@ -38,7 +38,7 @@ public class ContactListServiceTest {
 	
 	
 	@Test
-	@DisplayName("case of success.")
+	@DisplayName("Test for Get List - List returned successfully.")
 	void ContactListServiceSucess() {
 		
 		Contact contact = new Contact("Abel", "00000000001", "Abel@gmail.com");
@@ -65,7 +65,7 @@ public class ContactListServiceTest {
 	
 	
 	@Test
-	@DisplayName("Testing the regex.")
+	@DisplayName("Testing the regex - ")
 	void ContactListServiceSucess2() {
 		
         String regex = "^\\d+$";
@@ -101,7 +101,7 @@ public class ContactListServiceTest {
 	
 	
 	@Test
-	@DisplayName("case of failed.")
+	@DisplayName("Test for Get List - Failed to return list - Empty list. ")
 	void ContactListServiceFailed() {
 		
 		List<Contact> contacts = new ArrayList<>();

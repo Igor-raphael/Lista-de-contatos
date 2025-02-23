@@ -82,7 +82,7 @@ public class ContactDeleteServiceTest {
 	
 	
 	@Test
-	@DisplayName("Test for deleteByName - Contact dons't Exists.")
+	@DisplayName("Test for deleteByName - The contact does not exist.")
 	void ContactDeleteServiceTestFailed() {
 		
 		String name = "Fábio";

@@ -36,7 +36,7 @@ public class ContactGetNameServiceTest {
 	
 	
 	@Test
-	@DisplayName("Case of sucess.")
+	@DisplayName("Get specific name test.")
 	void ContactGetNameServiceTestSucess() {
 		
 		String name = "mathias";
@@ -69,7 +69,7 @@ public class ContactGetNameServiceTest {
 	}
 	
 	@Test
-	@DisplayName("Case of failed.")
+	@DisplayName("Specific get name failure test - Exception = Name does not exist.")
 	void ContactGetNameServiceTestFailed() {
 		
 		String name = " ";

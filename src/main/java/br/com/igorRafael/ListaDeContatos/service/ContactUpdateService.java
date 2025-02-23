@@ -46,7 +46,7 @@ public class ContactUpdateService {
 	
 	
 	
-	private void validateNullOrBlank(String value, Consumer<String> setter, String errorMessage) {
+	protected void validateNullOrBlank(String value, Consumer<String> setter, String errorMessage) {
 		if(value != null && !value.trim().isBlank()) {
 			setter.accept(value);;
 		
